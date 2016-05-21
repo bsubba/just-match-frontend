@@ -4,11 +4,6 @@
             <div>
                 <h1>{{ 'find_assignment.title' | translate }} ({{jobs.meta.total}})</h1>
             </div>
-            <!--<div>
-                <div class="dropdown-white-border"
-                     custom-select="category.id as category.name for category in searchAsync($searchTerm)"
-                     custom-select-options="categoryOptions" ng-model="categorySelected"></div>
-            </div>-->
         </div>
     </div>
     <div id="map_canvas" ng-class="map_class">
@@ -53,10 +48,14 @@
             </li>
         </ul>
         <div class="nav-job-list-bottom">
-            <button class="button-first" ng-click="ctrl.changePage = 1; getJobsPage('first');" ng-disabled="!jobs.links.first"></button>
-            <button class="button-prev" ng-click="ctrl.changePage = 1; getJobsPage('prev');" ng-disabled="!jobs.links.prev"></button>
-            <button class="button-next" ng-click="ctrl.changePage = 1; getJobsPage('next');" ng-disabled="!jobs.links.next"></button>
-            <button class="button-last" ng-click="ctrl.changePage = 1; getJobsPage('last');" ng-disabled="!jobs.links.last"></button>
+            <button class="button-first" ng-click="ctrl.changePage = 1; getJobsPage('first');"
+                    ng-disabled="!jobs.links.first"></button>
+            <button class="button-prev" ng-click="ctrl.changePage = 1; getJobsPage('prev');"
+                    ng-disabled="!jobs.links.prev"></button>
+            <button class="button-next" ng-click="ctrl.changePage = 1; getJobsPage('next');"
+                    ng-disabled="!jobs.links.next"></button>
+            <button class="button-last" ng-click="ctrl.changePage = 1; getJobsPage('last');"
+                    ng-disabled="!jobs.links.last"></button>
         </div>
         <div>
             <p><i>{{ ctrl.message | json}}</i></p>

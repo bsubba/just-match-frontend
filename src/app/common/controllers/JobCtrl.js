@@ -367,8 +367,15 @@
                     job_name: true,
                     joblist_name: true
                 };
-                this.toggleDT = function(textId) {
-                    $scope.dt[textId] = !$scope.dt[textId];
+                this.toggleDT = function (textIds) {
+                    if (Array.isArray(textIds)) {
+                        var i = 0;
+                        for(i; i < textIds.length; i++) {
+                            $scope.dt[textIds[i]] = !$scope.dt[textIds[i]];
+                        }
+                    } else {
+                        $scope.dt[textIds] = !$scope.dt[textIds];
+                    }
                 };
 
                 uiGmapGoogleMapApi.then(function (maps) {
@@ -449,7 +456,7 @@
                 }
 
 
-                this.getJobDetail = function() {
+                this.getJobDetail = function () {
                     Resources.job.get({
                         id: $routeParams.id,
                         "include": "owner,company,hourly-pay,job-users"
@@ -480,7 +487,7 @@
                         if (result.data.attributes.description) {
                             gtService.translate(result.data.attributes.description)
                                 .then(function (translation) {
-                                    if(!$scope.job.attributes.description_translation) {
+                                    if (!$scope.job.attributes.description_translation) {
                                         $scope.job.attributes.description_translation = {};
                                     }
                                     $scope.job.attributes.description_translation.text = translation.translatedText;
@@ -495,7 +502,7 @@
                         if (result.data.attributes.name) {
                             gtService.translate(result.data.attributes.name)
                                 .then(function (translation) {
-                                    if(!$scope.job.attributes.name_translation) {
+                                    if (!$scope.job.attributes.name_translation) {
                                         $scope.job.attributes.name_translation = {};
                                     }
                                     $scope.job.attributes.name_translation.text = translation.translatedText;
@@ -589,7 +596,7 @@
                     var isNav = 0;
                     var i = 0;
                     $scope.markers = [];
-                    if (['first', 'prev', 'next', 'last','self'].indexOf(mode) > -1) {
+                    if (['first', 'prev', 'next', 'last', 'self'].indexOf(mode) > -1) {
                         url = $scope.jobs_more.links[mode];
                         isNav = 1;
                     } else {
@@ -623,7 +630,7 @@
                             if (obj.attributes.name) {
                                 gtService.translate(obj.attributes.name)
                                     .then(function (translation) {
-                                        if(!$scope.jobs_more.data[idx].name_translation) {
+                                        if (!$scope.jobs_more.data[idx].name_translation) {
                                             $scope.jobs_more.data[idx].name_translation = {};
                                         }
                                         $scope.jobs_more.data[idx].name_translation.text = translation.translatedText;
@@ -696,7 +703,6 @@
                 };
 
                 $scope.getJobsPage('owner,company,hourly-pay');
-
             }])
         .controller('AcceptedJobCtrl', ['justFlowService', 'justRoutes', function (flow, routes) {
 
